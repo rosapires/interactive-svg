@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #one:hover{
+        fill: pink;
+    }
+
+  #two:hover{
+        fill: pink;
+    }
+   
+    #three:hover{
+        fill: pink;
+    }
+
+    #Layer_1:hover{
+cursor:pointer;
+width: 45%;
+height: auto;
+    }
+    </style>
+</head>
+<body>
+    <div id="pie"></div>
+
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", loadSvg);
+
+async function loadSvg(){
+
+    let svgData = await fetch("pie.svg");
+    let mySvg = await svgData.text();
+
+    console.log(mySvg);
+
+    document.querySelector("#pie").innerHTML = mySvg;
+
+}
+
+</script>
+</html>
