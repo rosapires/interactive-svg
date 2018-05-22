@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="graphic"></div>
+<div id="pop"></div>
+
+</body>
+
+<script>
+    let myJSON;
+    document.addEventListener("DOMContentLoaded", loadSvg);
+
+async function loadSvg(){
+
+    let svgData = await fetch("layers.svg");
+    let mySvg = await svgData.text();
+
+    let jsonData = await fetch("merdinha.json");
+     myJSON = await jsonData.json();
+
+    console.log(myJSON);
+
+    document.querySelector("#graphic").innerHTML = mySvg;
+    
+}
+
+document.querySelector("#graphic").addEventListener('click', showText)
+
+function showText(){
+    console.log(event.target.id);
+    let id = event.target.id;
+
+    myJSON.forEach(element => {
+        if(id == element.id){
+            console.log(element.text);
+           document.querySelector("#pop").innerHTML = element.text;
+        }
+        
+    });
+
+
+}
+
+ //let mac = document.querySelector("#mac")
+// let phone = document.querySelector("#phone");
+// let bike = document.querySelector("#bike");
+
+// mac.addEventListener('click', function () {
+//     getSingleEvent(mac.dataset.id)
+// });
+
+// phone.addEventListener('click', function () {
+//     getSingleEvent(phone.dataset.id)
+// });
+
+// bike.addEventListener('click', function () {
+//     getSingleEvent(bike.id)
+// });
+
+
+</script>
+
+
+</html>
