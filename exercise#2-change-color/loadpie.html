@@ -6,19 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-    #one:hover{
-        fill: pink;
-    }
 
-  #two:hover{
-        fill: pink;
-    }
-   
-    #three:hover{
-        fill: pink;
-    }
 
-    #Layer_1:hover{
+    #Layer_1{
 cursor:pointer;
 width: 45%;
 height: auto;
@@ -31,6 +21,7 @@ height: auto;
 </body>
 
 <script>
+    let myColor;
     document.addEventListener("DOMContentLoaded", loadSvg);
 
 async function loadSvg(){
@@ -41,6 +32,28 @@ async function loadSvg(){
     console.log(mySvg);
 
     document.querySelector("#pie").innerHTML = mySvg;
+    document.querySelector("#one").setAttribute("fill","#ca1");
+
+}
+
+document.querySelector("#pie").addEventListener("mouseover", showElement);
+function showElement(){
+console.log(event.target.getAttribute("id"));
+let myId = event.target.getAttribute("id");
+
+//get the original color and store it back
+myColor = document.querySelector("#" + myId).getAttribute("fill");
+console.log(myColor);
+
+document.querySelector("#"+myId).setAttribute("fill", "blue");
+
+}
+
+
+document.querySelector("#pie").addEventListener("mouseout", showElementAgain);
+function showElementAgain(){
+let myId = event.target.getAttribute("id");
+document.querySelector("#" + myId).setAttribute("fill", myColor);
 
 }
 
