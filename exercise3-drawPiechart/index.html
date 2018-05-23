@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    #circle{
+        width:50%;
+      
+
+    }
+    circle{
+     
+        transition: all 2s ease;
+
+    }
+svg{
+    background-color:aliceblue;
+
+   
+
+    border-radius: 50%;
+}
+
+#c1{
+    fill: none;
+    stroke:blueviolet;
+    stroke-width: 100px;
+    stroke-dasharray: 0 314;
+    stroke-dashoffset: 0;
+   
+}
+#c2{
+    fill: none;
+    stroke:green;
+    stroke-width: 100px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 0 314;
+}
+
+#c3{
+    fill: none;
+    stroke:yellow;
+    stroke-width: 100px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 0 314;
+}
+    </style>
+</head>
+<body>
+    <div id="circle">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle id="c1" cx="50" cy="50" r="50"/>
+                <circle id="c2" cx="50" cy="50" r="50"/>
+                <circle id="c3" cx="50" cy="50" r="50"/>
+              </svg>
+    </div>
+
+    <div id="text"></div>
+
+    <script>
+    
+    const c1 = document.querySelector("#c1");
+    const c2 = document.querySelector("#c2");
+    const c3 = document.querySelector("#c3");
+
+    document.querySelector("svg").addEventListener("mouseover", animate);
+        
+        function animate(){
+       
+     c1.style.strokeDasharray = "60 314";
+     c2.style.strokeDasharray = "160 314";
+     c3.style.strokeDasharray = "100 314";
+     c2.style.strokeDashoffset = "-60";
+     c3.style.strokeDashoffset = "-220";
+    }
+
+         document.querySelector("svg").addEventListener("mouseout", animateOut);
+        
+        function animateOut(){
+       
+            c1.style.strokeDasharray = "0 314";
+     c2.style.strokeDasharray = "0 314";
+     c3.style.strokeDasharray = "0 314";
+    }
+
+let id;
+let myJSON;
+    document.addEventListener("DOMContentLoaded", loadJson);
+
+async function loadJson(){
+
+    let jsonData = await fetch("data.json");
+     myJSON = await jsonData.json();
+
+    console.log(myJSON);
+
+    
+    
+}
+
+document.querySelector("#circle").addEventListener('mouseover', showText);
+
+function showText(){
+    console.log(event.target.id);
+    id = event.target.id;
+
+    myJSON.forEach(element => {
+        if(id == element.id){
+            console.log(element.percentage);
+           document.querySelector("#text").textContent = element.percentage;
+        }
+        
+    });
+
+document.querySelector("#circle").addEventListener('mouseout', hideText);
+
+function hideText(){
+ 
+           document.querySelector("#text").textContent = "";
+        
+        
+    };
+
+
+}
+
+    
+    </script>
+</body>
+</html>
